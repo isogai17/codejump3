@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+/* --- 1. リセット & ベース設定 --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    color: #383e45;
+    background-color: #fff;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- 2. 共通レイアウト (Grid / Container) --- */
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.sect-wrap {
+    padding: 80px 0;
+}
+
+.sect-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sect-heading::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: #383e45;
+}
+
+/* --- 3. ヘッダー (Gridレイアウト) --- */
+.site-hdr {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.hdr-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    /* ヘッダーの左右配置をGridで制御 */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+.brand-logo {
+    width: 120px;
+    line-height: 1px;
+    padding: 10px 0;
+}
+
+.nav-menu {
+    justify-self: end;
+}
+
+.nav-list {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 30px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* --- 4. メインビジュアル --- */
+.hero-section {
+    margin-top: 64px; /* ヘッダー高さ分の余白 */
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* --- 5. About セクション (Gridレイアウト) --- */
+.about-grid {
+    display: grid;
+    /* モバイル標準は縦1列、PCサイズで2列に可変 */
+    grid-template-columns: 1fr;
+    gap: 30px;
+    justify-items: center;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+}
+
+.bio-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.bio-desc {
+    font-size: 0.95rem;
+    color: #555;
+    text-align: left;
+}
+
+/* --- 6. Bicycle セクション (可変 Grid レイアウト) --- */
+.bicycle-grid {
+    display: grid;
+    /* レスポンシブで自動的に1列〜3列へ切り替わる設定 */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.bike-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.bike-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* --- 7. フッター --- */
+.site-ftr {
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* --- 8. レスポンシブ調整 --- */
+@media (min-width: 640px) {
+    /* タブレット以上で About を 左右並びのGridに変更 */
+    .about-grid {
+        grid-template-columns: 120px 1fr;
+        text-align: left;
+        align-items: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-bg img {
+        height: 380px;
+    }
+    .sect-wrap {
+        padding: 50px 0;
+    }
+}
